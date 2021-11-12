@@ -7,24 +7,38 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int count = 0;
+
   void decrementa() {
-    print('Decrementa');
+    setState(() {
+      count --;
+    });
+    print (count);
   }
 
   void encrementa() {
-    print('encrementa');
+    setState(() {
+      count ++;
+    });
+    print (count);
   }
 
   @override
@@ -32,12 +46,12 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/imagens/sorvete.jpg'),
-            fit: BoxFit.cover,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/imagens/sorvete.jpg'),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -49,10 +63,10 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const Padding(padding: EdgeInsets.all(32),
+              Padding(padding: const EdgeInsets.all(32),
                 child: Text(
-                  '0',
-                  style: TextStyle(
+                  count.toString(),
+                  style: const TextStyle(
                     fontSize: 100,
                     color: Colors.white,
                   ),
@@ -106,3 +120,5 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+

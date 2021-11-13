@@ -41,6 +41,9 @@ class _HomePageState extends State<HomePage> {
     print (count);
   }
 
+  bool get seVazio => count == 0;
+  bool get seCheio => count == 20;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,20 +58,20 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Pode entrar!',
+              Text(
+                seCheio ? 'Lotado!!' : 'Pode entrar!',
                 style: TextStyle(
                   fontSize: 30,
-                  color: Colors.white,
+                  color: seCheio ? Colors.red : Colors.white,
                   fontWeight: FontWeight.w700,
                 ),
               ),
               Padding(padding: const EdgeInsets.all(32),
                 child: Text(
                   count.toString(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 100,
-                    color: Colors.white,
+                    color: seCheio ? Colors.red : Colors.white,
                   ),
                 ),
               ),
@@ -76,9 +79,9 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextButton(
-                    onPressed: decrementa,
+                    onPressed: seVazio ? null : decrementa,
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: seVazio ? Colors.white.withOpacity(0.2) : Colors.white,
                       fixedSize: const Size(100, 100),
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(
@@ -95,9 +98,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(width: 32),
                   TextButton(
-                    onPressed: encrementa,
+                    onPressed: seCheio ? null : encrementa,
                     style: TextButton.styleFrom(
-                      backgroundColor: Colors.white,
+                      backgroundColor: seCheio ? Colors.white.withOpacity(0.2) : Colors.white,
                       fixedSize: const Size(100, 100),
                       primary: Colors.black,
                       shape: RoundedRectangleBorder(
